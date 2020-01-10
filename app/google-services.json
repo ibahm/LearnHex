@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "329706445437",
+    "firebase_url": "https://rstudify.firebaseio.com",
+    "project_id": "rstudify",
+    "storage_bucket": "rstudify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329706445437:android:86a12a625a35d961ccaf14",
+        "android_client_info": {
+          "package_name": "com.example.studyprofile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329706445437-ekbmqlmj70be6onjvo55gidtd6ulj3od.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXvzPz9t9-BcLrHYtWFt_it2vyB1SuN48"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329706445437-ekbmqlmj70be6onjvo55gidtd6ulj3od.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
