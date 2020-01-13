@@ -43,17 +43,17 @@ public class Login extends AppCompatActivity {
                 String e = uEmail.getText().toString().trim();
                 String p = uPassword.getText().toString().trim();
 
-                if (TextUtils.isEmpty(e)) { // check if email field is empty
+                if (TextUtils.isEmpty(e)) { // check if email field is empty // O(N)
                     uEmail.setError("Enter Email");
                     return;
                 }
 
-                if (TextUtils.isEmpty(p)) { // check if password field is empty
+                if (TextUtils.isEmpty(p)) { // check if password field is empty // O(N)
                     uPassword.setError("Enter Password");
                     return;
                 }
 
-                if (p.length() < 8) {   // check if password is greater than 7 characters
+                if (p.length() < 8) {   // check if password is greater than 7 characters // O(N)
                     uEmail.setError("Password must be more than 7 characters");
                     return;
                 }
@@ -64,7 +64,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (task.isSuccessful()) {
+                        if (task.isSuccessful()) { // O(1)
                             Toast.makeText(Login.this,"Signed In", Toast.LENGTH_SHORT).show();  // show user message
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }

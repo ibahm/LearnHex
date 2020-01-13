@@ -50,7 +50,7 @@ public class Register extends AppCompatActivity {
         uProgressBar = findViewById(R.id.progressBar2);
         fStore = FirebaseFirestore.getInstance();
 
-        if (fAuth.getCurrentUser() != null) {   // Send user to main activity if already logged in
+        if (fAuth.getCurrentUser() != null) {   // Send user to main activity if already logged in // O(1)
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
 
@@ -61,17 +61,17 @@ public class Register extends AppCompatActivity {
                final String p = uPassword.getText().toString().trim();
                final String n = uName.getText().toString();
 
-                if (TextUtils.isEmpty(e)) { // check if email field is empty
+                if (TextUtils.isEmpty(e)) { // check if email field is empty // O(N)
                     uEmail.setError("Enter Email");
                     return;
                 }
 
-                if (TextUtils.isEmpty(p)) { // check if password field is empty
+                if (TextUtils.isEmpty(p)) { // check if password field is empty // O(N)
                     uPassword.setError("Enter Password");
                     return;
                 }
 
-                if (p.length() < 8) {   // check if password is greater than 7 characters
+                if (p.length() < 8) {   // check if password is greater than 7 characters // O(N)
                     uEmail.setError("Password must be more than 7 characters");
                     return;
                 }
@@ -81,10 +81,10 @@ public class Register extends AppCompatActivity {
                 fAuth.createUserWithEmailAndPassword(e,p).addOnCompleteListener(new OnCompleteListener<AuthResult>() { // create user in FireBase
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) { // check if user is created
+                        if (task.isSuccessful()) { // check if user is created  // O(1)
                             Toast.makeText(Register.this,"Account Created", Toast.LENGTH_SHORT).show(); // display message to the user
                             userID = fAuth.getCurrentUser().getUid();   // assign userID to user's id number
-                            DocumentReference documentReference = fStore.collection("users").document(userID);  // create a collections('users') of documents('userID')
+                            DocumentReference documentReference = fStore.collection("users").document(userID);  // create a collection('users') of documents('userID')
                             Map<String,Object> user = new HashMap<>();  // create and store data to the users document
                             user.put("ID", userID);
                             user.put("Name", n);
