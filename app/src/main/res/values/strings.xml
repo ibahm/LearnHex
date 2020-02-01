@@ -7,4 +7,5 @@
     <string name="title_activity_chat_custom_lastchat_row">chat_custom_lastchat_row</string>
     <string name="title_activity_chat_notification_row">chat_notification_row</string>
     <string name="title_activity_chat_fragment_chat">chat_fragment_chat</string>
+    <string name="notifications">Notifications</string>
 </resources>
