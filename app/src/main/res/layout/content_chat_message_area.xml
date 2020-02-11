@@ -60,8 +60,7 @@
                 android:layout_height="wrap_content"
                 android:text="Message..."
                 android:textColor="#807474"
-                android:textSize="20px"
-                app:emojiconSize="20px" />
+                android:textSize="20px" />
 
         </LinearLayout>
 
