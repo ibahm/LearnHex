@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">studyProfile</string>
+    <string name="title_activity_chat_message_area">chat_message_area</string>
+    <string name="title_activity_chat_chat">chat_chat</string>
+    <string name="title_activity_chat_notifications">chat_notifications</string>
+    <string name="title_activity_chat_custom_friend_list_row">chat_custom_friend_list_row</string>
+    <string name="title_activity_chat_custom_lastchat_row">chat_custom_lastchat_row</string>
+    <string name="title_activity_chat_notification_row">chat_notification_row</string>
+    <string name="title_activity_chat_fragment_chat">chat_fragment_chat</string>
+    <string name="notifications">Notifications</string>
 </resources>
