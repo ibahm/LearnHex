@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private Button button;
     static ArrayList<String> notes=new ArrayList<>();
-    static ArrayAdapter arrayAdapter;
+    static ArrayAdapter arrayAdapter;// adapter for listview
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView=(ListView) findViewById(R.id.listView);
 
-        notes.add("First try");
+        notes.add("New Folder");
 
         arrayAdapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1,notes );
         listView.setAdapter(arrayAdapter);
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        
+
 
         button=(Button) findViewById(R.id.notesbutton);
         button.setOnClickListener(new View.OnClickListener() {
