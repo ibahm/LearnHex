@@ -3,8 +3,11 @@ package com.example.studenttimetable;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.CalendarContract;
 import android.util.AttributeSet;
+import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,12 +30,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import static android.util.EventLog.*;
+
 public class EditTimetable extends LinearLayout {
 
     ImageButton nextbutton, previousbutton;
     TextView currentDate;
     GridView gridView;
-    private static final int MAX_CALENDAR_DAYS = 42;
+    public static final int MAX_CALENDAR_DAYS = 42;
     Calendar timetable = Calendar.getInstance(Locale.ENGLISH);
     Context context;
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
@@ -41,6 +46,7 @@ public class EditTimetable extends LinearLayout {
     AlertDialog alertDialog;
     List<Date> dates = new ArrayList<>();
     List<TimetableEvents> eventsList = new ArrayList<>();
+
 
     OpenDatabase openDatabase;
     Grid grid;
@@ -136,7 +142,7 @@ public class EditTimetable extends LinearLayout {
 
     }
 
-    private void SaveEvents (String event, String time, String date, String month, String year){
+    public void SaveEvents (String event, String time, String date, String month, String year){
         openDatabase = new OpenDatabase(context);
         SQLiteDatabase database = openDatabase.getWritableDatabase();
         openDatabase.SaveEvent(event, time, date, month, year, database);
@@ -144,7 +150,7 @@ public class EditTimetable extends LinearLayout {
         Toast.makeText(context, "Event Saved", Toast.LENGTH_SHORT).show();
     }
 
-    private void Initialise(){
+    public void Initialise(){
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.layout_of_timetable, this);
         nextbutton = view.findViewById(R.id.next);
@@ -154,7 +160,7 @@ public class EditTimetable extends LinearLayout {
 
     }
 
-    private void TimetableSetUp(){
+    public void TimetableSetUp(){
         String TodaysDate = dateFormat.format(timetable.getTime());
         currentDate.setText(TodaysDate);
         dates.clear();
@@ -162,6 +168,7 @@ public class EditTimetable extends LinearLayout {
         monthTimetable.set(Calendar.DAY_OF_MONTH, 1);
         int FirstDay = monthTimetable.get(Calendar.DAY_OF_WEEK)-1;
         monthTimetable.add(Calendar.DAY_OF_MONTH, -FirstDay);
+        MonthlyEvents(monthFormat.format(timetable.getTime()),yearFormat.format(timetable.getTime()));
 
         while (dates.size() < MAX_CALENDAR_DAYS){
             dates.add(monthTimetable.getTime());
@@ -170,5 +177,25 @@ public class EditTimetable extends LinearLayout {
 
         grid = new Grid(context, dates, timetable,eventsList);
         gridView.setAdapter(grid);
+    }
+
+    public void MonthlyEvents(String Month, String year){
+        eventsList.clear();
+        openDatabase = new OpenDatabase(context);
+        SQLiteDatabase database = openDatabase.getReadableDatabase();
+        Cursor cursor = openDatabase.ReadEventsperMonth(Month, year, database);
+        while (cursor.moveToNext()){
+            String event = cursor.getString(cursor.getColumnIndex(Database.EVENT));
+            String time = cursor.getString(cursor.getColumnIndex(Database.TIME));
+            String date = cursor.getString(cursor.getColumnIndex(Database.DATE));
+            String month = cursor.getString(cursor.getColumnIndex(Database.MONTH));
+            String Year = cursor.getString(cursor.getColumnIndex(Database.YEAR));
+            TimetableEvents events = new TimetableEvents(event,time,date,month,Year);
+            eventsList.add(events);
+
+        }
+
+        cursor.close();
+        openDatabase.close();
     }
 }
