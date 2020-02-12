@@ -122,12 +122,12 @@ public class EditTimetable extends LinearLayout {
                 AddEvent.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        SaveEvents(NameofEvent.getText().toString(), TimeofEvent.getText().toString(),date,month,year);
+                        SaveEvents(NameofEvent.getText().toString(), TimeofEvent.getText().toString(), date, month, year);
                         TimetableSetUp();
                         alertDialog.dismiss();
-
-
                     }
+
+
                 });
 
                 builder.setView(addView);

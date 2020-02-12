@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,12 +46,14 @@ public class StudentEvents extends RecyclerView.Adapter<StudentEvents.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView DateTxt, Time, Event;
+        Button deleteevent;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             DateTxt = itemView.findViewById(R.id.eventdate);
             Event = itemView.findViewById(R.id.eventname);
             Time = itemView.findViewById(R.id.eventtime);
+            deleteevent = itemView.findViewById(R.id.deleteevent);
 
         }
     }
