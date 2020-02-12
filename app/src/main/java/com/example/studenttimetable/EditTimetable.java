@@ -21,7 +21,10 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -130,13 +133,58 @@ public class EditTimetable extends LinearLayout {
                 builder.setView(addView);
                 alertDialog = builder.create();
                 alertDialog.show();
-
-
             }
 
         });
 
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String date = eventDate.format(dates.get(position));
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setCancelable(true);
+                View showView = LayoutInflater.from(parent.getContext()).inflate(R.layout.events, null);
+
+                RecyclerView recyclerView = showView.findViewById(R.id.Events);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(showView.getContext());
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setHasFixedSize(true);
+                StudentEvents studentEvents = new StudentEvents(showView.getContext()
+                ,DailyEvents(date));
+                recyclerView.setAdapter(studentEvents);
+                studentEvents.notifyDataSetChanged();
+
+                builder.setView(showView);
+                alertDialog = builder.create();
+                alertDialog.show();
+
+
+
+                return true;
+            }
+        });
+
+    }
+
+    private ArrayList<TimetableEvents> DailyEvents(String date){
+        ArrayList<TimetableEvents> arrayList = new ArrayList<>();
+        openDatabase = new OpenDatabase(context);
+        SQLiteDatabase database = openDatabase.getReadableDatabase();
+        Cursor cursor = openDatabase.ReadEvents(date, database);
+        while(cursor.moveToNext()){
+            String event = cursor.getString(cursor.getColumnIndex(Database.EVENT));
+            String time = cursor.getString(cursor.getColumnIndex(Database.TIME));
+            String Date = cursor.getString(cursor.getColumnIndex(Database.DATE));
+            String month = cursor.getString(cursor.getColumnIndex(Database.MONTH));
+            String Year = cursor.getString(cursor.getColumnIndex(Database.YEAR));
+            TimetableEvents events = new TimetableEvents(event, time, Date, month, Year);
+            arrayList.add(events);
         }
+        cursor.close();
+        openDatabase.close();
+        return arrayList;
+    }
 
 
     public EditTimetable(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
