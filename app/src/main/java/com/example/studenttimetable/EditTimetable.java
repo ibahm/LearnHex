@@ -43,6 +43,8 @@ public class EditTimetable extends LinearLayout {
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
     SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", Locale.ENGLISH);
     SimpleDateFormat yearFormat = new SimpleDateFormat("YYYY", Locale.ENGLISH);
+    SimpleDateFormat eventDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
     AlertDialog alertDialog;
     List<Date> dates = new ArrayList<>();
     List<TimetableEvents> eventsList = new ArrayList<>();
@@ -110,7 +112,7 @@ public class EditTimetable extends LinearLayout {
                     }
                 });
 
-                final String date = dateFormat.format(dates.get(position));
+                final String date = eventDate.format(dates.get(position));
                 final String month = monthFormat.format(dates.get(position));
                 final String year = yearFormat.format(dates.get(position));
 
