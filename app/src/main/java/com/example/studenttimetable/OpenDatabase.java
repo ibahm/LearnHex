@@ -41,7 +41,6 @@ public class OpenDatabase extends SQLiteOpenHelper {
         contentValues.put(Database.YEAR,year);
         database.insert(Database.EVENT_TABLE_NAME, null,contentValues);
 
-
     }
 
     public Cursor ReadEvents(String date, SQLiteDatabase database) {

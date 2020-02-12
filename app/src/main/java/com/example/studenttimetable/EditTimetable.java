@@ -172,6 +172,7 @@ public class EditTimetable extends LinearLayout {
         monthTimetable.add(Calendar.DAY_OF_MONTH, -FirstDay);
         MonthlyEvents(monthFormat.format(timetable.getTime()),yearFormat.format(timetable.getTime()));
 
+
         while (dates.size() < MAX_CALENDAR_DAYS){
             dates.add(monthTimetable.getTime());
             monthTimetable.add(Calendar.DAY_OF_MONTH, 1);

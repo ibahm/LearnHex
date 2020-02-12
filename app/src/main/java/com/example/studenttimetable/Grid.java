@@ -67,12 +67,13 @@ public class Grid extends ArrayAdapter {
         TextView NumberedDay = view.findViewById(R.id.timetableday);
         TextView NumberedEvent = view.findViewById(R.id.timetablevent);
         NumberedDay.setText(String.valueOf(NumberofDay));
+
         Calendar eventTimetable = Calendar.getInstance();
         ArrayList<String> arrayList = new ArrayList<>();
-        for(int i = 0;i < events.size(); i++){
+        for(int i = 0; i < events.size();i++){
             eventTimetable.setTime(StringtoDate(events.get(i).getDATE()));
-            if(NumberofDay == eventTimetable.get(Calendar.DAY_OF_MONTH) && ShowMonth == eventTimetable.get(Calendar.MONTH)+1
-                    && ShowYear == eventTimetable.get(Calendar.YEAR)){
+            if(NumberofDay == eventTimetable.get(Calendar.DAY_OF_MONTH) && CurrentMonth == eventTimetable.get(Calendar.MONTH)+1
+                    && CurrentYear == eventTimetable.get(Calendar.YEAR)){
                 arrayList.add(events.get(i).getEVENT());
                 NumberedEvent.setText(arrayList.size()+" Events");
 
@@ -81,12 +82,11 @@ public class Grid extends ArrayAdapter {
         }
 
 
-
-        return view;
+                return view;
     }
 
     public Date StringtoDate(String eventDate){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM--dd", Locale.ENGLISH);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date date = null;
         try{
             date = format.parse(eventDate);
