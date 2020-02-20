@@ -3,6 +3,7 @@ package com.example.studenttimetable;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.CalendarContract;
@@ -154,10 +155,15 @@ public class EditTimetable extends LinearLayout {
                 ,DailyEvents(date));
                 recyclerView.setAdapter(studentEvents);
                 studentEvents.notifyDataSetChanged();
-
                 builder.setView(showView);
                 alertDialog = builder.create();
                 alertDialog.show();
+                alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        TimetableSetUp();
+                    }
+                });
 
 
 
