@@ -1,6 +1,7 @@
 package com.example.studenttimetable;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ public class StudentEvents extends RecyclerView.Adapter<StudentEvents.MyViewHold
 
     Context context;
     ArrayList<TimetableEvents> arrayList;
+    OpenDatabase openDatabase;
 
     public StudentEvents(Context context, ArrayList<TimetableEvents> arrayList) {
         this.context = context;
@@ -31,11 +33,19 @@ public class StudentEvents extends RecyclerView.Adapter<StudentEvents.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        TimetableEvents events = arrayList.get(position);
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+        final TimetableEvents events = arrayList.get(position);
         holder.Event.setText(events.getEVENT());
         holder.DateTxt.setText(events.getDATE());
         holder.Time.setText(events.getTIME());
+        holder.deleteevent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteStudentEvents(events.getEVENT(), events.getDATE(), events.getTIME());
+                arrayList.remove(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -56,5 +66,13 @@ public class StudentEvents extends RecyclerView.Adapter<StudentEvents.MyViewHold
             deleteevent = itemView.findViewById(R.id.deleteevent);
 
         }
+    }
+
+    private void DeleteStudentEvents(String event, String date, String time){
+        openDatabase = new OpenDatabase(context);
+        SQLiteDatabase database = openDatabase.getWritableDatabase();
+        openDatabase.DeleteEvents(event, date, time,database);
+        openDatabase.close();
+
     }
 }
