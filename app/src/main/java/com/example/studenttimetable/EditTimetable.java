@@ -43,19 +43,20 @@ public class EditTimetable extends LinearLayout {
     GridView gridView;
     public static final int MAX_CALENDAR_DAYS = 42;
     Calendar timetable = Calendar.getInstance(Locale.ENGLISH);
+    OpenDatabase openDatabase;
     Context context;
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
     SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", Locale.ENGLISH);
     SimpleDateFormat yearFormat = new SimpleDateFormat("YYYY", Locale.ENGLISH);
     SimpleDateFormat eventDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
+    Grid grid;
     AlertDialog alertDialog;
     List<Date> dates = new ArrayList<>();
     List<TimetableEvents> eventsList = new ArrayList<>();
 
 
-    OpenDatabase openDatabase;
-    Grid grid;
+
+
 
     public EditTimetable(Context context) {
         super(context);
@@ -127,7 +128,6 @@ public class EditTimetable extends LinearLayout {
                         TimetableSetUp();
                         alertDialog.dismiss();
                     }
-
 
                 });
 
@@ -201,7 +201,7 @@ public class EditTimetable extends LinearLayout {
     public void SaveEvents (String event, String time, String date, String month, String year){
         openDatabase = new OpenDatabase(context);
         SQLiteDatabase database = openDatabase.getWritableDatabase();
-        openDatabase.SaveEvent(event, time, date, month, year, database);
+        openDatabase.SaveEvent(event,time,date,month,year,database);
         openDatabase.close();
         Toast.makeText(context, "Event Saved", Toast.LENGTH_SHORT).show();
     }
