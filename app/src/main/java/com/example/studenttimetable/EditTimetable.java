@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.CalendarContract;
 import android.util.AttributeSet;
-import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,8 +30,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import static android.util.EventLog.*;
 
 public class EditTimetable extends LinearLayout {
 
@@ -155,6 +150,7 @@ public class EditTimetable extends LinearLayout {
                 ,DailyEvents(date));
                 recyclerView.setAdapter(studentEvents);
                 studentEvents.notifyDataSetChanged();
+
                 builder.setView(showView);
                 alertDialog = builder.create();
                 alertDialog.show();

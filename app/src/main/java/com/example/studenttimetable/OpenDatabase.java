@@ -44,22 +44,22 @@ public class OpenDatabase extends SQLiteOpenHelper {
     }
 
     public Cursor ReadEvents(String date, SQLiteDatabase database) {
-        String[] Projections = {Database.EVENT, Database.TIME, Database.DATE, Database.MONTH, Database.YEAR};
-        String Selection = Database.DATE + "=?";
+        String[] Projections = {Database.EVENT,Database.TIME,Database.DATE,Database.MONTH,Database.YEAR};
+        String Selection = Database.DATE +"=?";
         String[] SelectionArgs = {date};
-        return database.query(Database.EVENT_TABLE_NAME, Projections, Selection, SelectionArgs, null, null, null);
+        return database.query(Database.EVENT_TABLE_NAME,Projections,Selection,SelectionArgs, null, null, null);
 
     }
 
     public Cursor ReadEventsperMonth(String month, String year, SQLiteDatabase database) {
-        String[] Projections = {Database.EVENT, Database.TIME, Database.DATE, Database.MONTH, Database.YEAR};
-        String Selection = Database.MONTH + "=? and " + Database.YEAR + "=?";
+        String[] Projections = {Database.EVENT,Database.TIME,Database.DATE,Database.MONTH,Database.YEAR};
+        String Selection = Database.MONTH +"=? and "+Database.YEAR+"=?";
         String[] SelectionArgs = {month, year};
-        return database.query(Database.EVENT_TABLE_NAME, Projections, Selection, SelectionArgs, null, null, null);
+        return database.query(Database.EVENT_TABLE_NAME,Projections,Selection,SelectionArgs, null, null, null);
 
     }
 
-    public void DeleteEvents(String event, String date, String time, SQLiteDatabase database) {
+    public void DeleteEvents(String event,String date,String time,SQLiteDatabase database) {
         String selection = Database.EVENT+"=? and "+Database.DATE+"=? and "+Database.TIME+"=?";
         String[] selectionArg = {event, date, time};
         database.delete(Database.EVENT_TABLE_NAME,selection,selectionArg);
