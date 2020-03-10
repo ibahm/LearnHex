@@ -19,7 +19,7 @@
         android:textStyle="bold"
         android:textSize="9sp"
         android:id="@+id/timetablevent"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:layout_gravity="center"/>
 
 </LinearLayout>

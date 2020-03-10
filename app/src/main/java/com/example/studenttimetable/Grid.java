@@ -62,7 +62,7 @@ public class Grid extends ArrayAdapter {
         if (ShowMonth == CurrentMonth && ShowYear == CurrentYear) {
             view.setBackgroundColor(getContext().getResources().getColor(R.color.green));
         } else {
-            view.setBackgroundColor(Color.parseColor("#cccccc"));
+            view.setBackgroundColor(Color.parseColor("#ffffff"));
         }
         TextView NumberedDay = view.findViewById(R.id.timetableday);
         TextView NumberedEvent = view.findViewById(R.id.timetablevent);
