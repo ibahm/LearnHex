@@ -64,16 +64,16 @@
             android:layout_weight="1"
             android:textStyle="bold"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Tues"
-            android:background="@android:color/white"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
-            android:textStyle="bold"
-            />
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:text="Tues"
+            android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

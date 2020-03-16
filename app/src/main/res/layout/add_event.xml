@@ -44,8 +44,8 @@
         android:layout_margin="10dp"
         android:textAllCaps="false"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:background="@android:color/white"
+        android:textColor="@android:color/holo_green_light"
+        android:background="@android:color/holo_purple"
         android:id="@+id/addevent"/>
 
 </LinearLayout>
